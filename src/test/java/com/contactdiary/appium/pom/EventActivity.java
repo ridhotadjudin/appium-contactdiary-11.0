@@ -1,11 +1,10 @@
 package com.contactdiary.appium.pom;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import com.contactdiary.appium.popup.Calendar;
+import com.contactdiary.appium.popup.CalendarView;
 import com.contactdiary.appium.popup.Mitigation;
 import com.contactdiary.appium.popup.Time;
 
@@ -19,6 +18,7 @@ public class EventActivity {
 	
 	public AndroidDriver driver;
 	public Calendar calendar;
+//	public CalendarView calendar;
 	public Time time;
 	public Mitigation mitigation;
 	
@@ -33,8 +33,14 @@ public class EventActivity {
 	}
 	
 	public void delay(int input) {
-		driver.manage().timeouts().implicitlyWait(input, TimeUnit.SECONDS);
+		try {
+			Thread.sleep(input*1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
+	@AndroidFindBy(xpath = "//android.widget.TextView")
+	public WebElement getHeader;
 	
 	//element event activity
 	@AndroidFindBy(id = "com.apozas.contactdiary:id/eventname_input")
@@ -66,16 +72,16 @@ public class EventActivity {
 	@AndroidFindBy(xpath = "//android.widget.TextView[3]" )
 	public WebElement btnMitigation;
 	
-//	@AndroidFindBy(xpath = "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.widget.ImageButton" )
-//	public WebElement btnSave;
 	@AndroidFindBy(id = "com.apozas.contactdiary:id/okButton_AddEvent")
 	public WebElement btnSave;
 	
 	public void clickStartDate() {
 		inStartDate.click();
+		
 		calendar = new Calendar(driver);
 		calendar.clickDateStart();
-		delay(5);
+		
+		delay(3);
 		inStartTime.click();
 		time = new Time(driver);
 		time.setTimeStart();
@@ -85,7 +91,7 @@ public class EventActivity {
 		inEndDate.click();
 		calendar = new Calendar(driver);
 		calendar.clickDateStart();
-		delay(5);
+		delay(3);
 		inEndTime.click();
 		time = new Time(driver);
 		time.setTimeEnd();
@@ -97,8 +103,6 @@ public class EventActivity {
 		inputPeople.sendKeys(people);
 		inputPhone.sendKeys(phone);
 		inputNote.sendKeys(note);
-		delay(5);
-//		btnSave.click();
 	}
 	
 	public void boxOutdoor() {
@@ -109,9 +113,9 @@ public class EventActivity {
 	}
 	
 	public void clickMitigation() {
-		delay(5);
+		delay(3);
 		btnMitigation.click();
-		delay(5);
+		delay(3);
 		mitigation = new Mitigation(driver);
 		mitigation.clickBoxDistance();
 		mitigation.clickBoxMaskMe();
@@ -122,10 +126,7 @@ public class EventActivity {
 	
 	public void save() {
 //		callTouch(949,2256);
-//		callTouch(949,2256);
 		btnSave.click();
-//		btnSave.click();
-//		btnSave.click();
 	}
 	
 }

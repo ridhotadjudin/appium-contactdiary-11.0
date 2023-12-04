@@ -1,5 +1,6 @@
 package com.contactdiary.appium.pom;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
@@ -20,37 +21,23 @@ public class MainActivity {
 		this.driver = driver;
 	    PageFactory.initElements(new AppiumFieldDecorator(driver),this);
 	}
-	
-	public void callTouch(int x, int y) {
-		TouchAction touchMain = new TouchAction(driver);
-		touchMain.tap(PointOption.point(x, y)).perform();
-	}
-	
-	@AndroidFindBy(id = "com.apozas.contactdiary:id/fab")
-	public WebElement btnUtama;
-	
-	@AndroidFindBy(id = "//android.widget.TextView")
-	public WebElement listMain;
-	
+
+//	@AndroidFindBy(id = "//android.widget.TextView")
+//	public WebElement listMain;
 	
 	public void clickBtnUtama() {
-		btnUtama.click();
 		System.out.println("Tombol ditekan");
+		driver.findElement(By.id("com.apozas.contactdiary:id/fab")).click();
 	}
 	
 	public void clickNewEvent() {
-		callTouch(953, 1821);
+		TouchAction touch = new TouchAction(driver);
+		touch.tap(PointOption.point(953, 1821)).perform();
 	}
 	
 	public void clickNewContact() {
-		touch.callTouch(953, 2017);
-	}
-	
-	public boolean getMainEventText() {
-		boolean check = true;
-		if(listMain.equals(null)){
-			check = false;
-		}
-		return check;
+		System.out.println("click new contact");
+		TouchAction touch = new TouchAction(driver);
+		touch.tap(PointOption.point(969, 2022)).perform();
 	}
 }

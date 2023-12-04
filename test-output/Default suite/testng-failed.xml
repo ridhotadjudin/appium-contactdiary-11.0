@@ -5,7 +5,7 @@
     <classes>
       <class name="com.contactdiary.appium.testcase.ContactDiaryTest">
         <methods>
-          <include name="test_functionEvent"/>
+          <include name="test_gotoContactActivity"/>
           <include name="init"/>
         </methods>
       </class> <!-- com.contactdiary.appium.testcase.ContactDiaryTest -->
